@@ -49,8 +49,6 @@ jobs:
         name: TextSync.ipa
         path: |
           /Users/runner/work/textsync/textsync/build/ios/iphoneos/TextSync.ipa
-          /Users/runner/work/textsync/textsync/ios/Podfile
-          /Users/runner/work/textsync/textsync/ios/Podfile.lock
     - uses: IsaacShelton/update-existing-release@v1.3.1
       with:
         token: ${{secrets.GITHUB_TOKEN}}

@@ -24,8 +24,11 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Text(
-                "Login",
+                "TextSync",
                 style: TextStyle(fontSize: 50),
+              ),
+              const SizedBox(
+                height: 100,
               ),
               TextField(
                 decoration: const InputDecoration(
