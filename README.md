@@ -3,12 +3,12 @@ A chat app built with flutter and firebase
 
 # Setup
 
-## For M1 macs
+## For apple silicon macs
 ```bash
 cd ios
 arch -x86_64 pod install
 ```
-## For non M1 macs
+## For non apple silicon macs
 ```bash
 cd ios
 pod install
@@ -20,7 +20,7 @@ pod deintegrate Runner.xcodeproj
 pod install
 ```
 
-## Generating linking firebase (using jdk 11)
+## Linking firebase and generating hashes for android (using jdk 11)
 ```bash
 flutterfire configure
 cd android

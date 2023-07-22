@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:textsync/components/dismissable.dart';
 import 'package:textsync/states/homescreen.dart';
 import 'package:textsync/states/loginscreen.dart';
 import 'package:textsync/userclass.dart';
@@ -37,15 +38,17 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'TextSync',
-      theme: ThemeData(
-          useMaterial3: true, colorScheme: colorscheme.lightColorScheme),
-      darkTheme: ThemeData(
-          useMaterial3: true, colorScheme: colorscheme.darkColorScheme),
-      themeMode: ThemeMode.system,
-      home: _isLoggedIn ? HomeScreen() : LoginScreen(),
+    return DismissableWidget(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'TextSync',
+        theme: ThemeData(
+            useMaterial3: true, colorScheme: colorscheme.lightColorScheme),
+        darkTheme: ThemeData(
+            useMaterial3: true, colorScheme: colorscheme.darkColorScheme),
+        themeMode: ThemeMode.system,
+        home: _isLoggedIn ? HomeScreen() : LoginScreen(),
+      ),
     );
   }
 }

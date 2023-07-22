@@ -17,48 +17,50 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.fromLTRB(24, 24, 24, 32),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                "TextSync",
-                style: TextStyle(fontSize: 50),
-              ),
-              const SizedBox(
-                height: 100,
-              ),
-              TextField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Email',
+        child: SafeArea(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  "TextSync",
+                  style: TextStyle(fontSize: 50),
                 ),
-                onChanged: (val) {
-                  setState(() {
-                    email = val;
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              TextField(
-                obscureText: true,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'Password'),
-                onChanged: (val) {
-                  setState(() {
-                    password = val;
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              const FilledButton(onPressed: login, child: Text('Sign In')),
-            ],
+                const SizedBox(
+                  height: 100,
+                ),
+                TextField(
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Email Address *',
+                  ),
+                  onChanged: (val) {
+                    setState(() {
+                      email = val;
+                    });
+                  },
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                TextField(
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'Password *'),
+                  onChanged: (val) {
+                    setState(() {
+                      password = val;
+                    });
+                  },
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                const FilledButton(onPressed: login, child: Text('Sign In')),
+              ],
+            ),
           ),
         ),
       ),
