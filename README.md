@@ -1,4 +1,4 @@
-# textsync
+# Viridian
 A chat app built with flutter and firebase
 
 # Setup
@@ -6,17 +6,20 @@ A chat app built with flutter and firebase
 ## For apple silicon macs
 ```bash
 cd ios
+pod repo update
 arch -x86_64 pod install
 ```
 ## For non apple silicon macs
 ```bash
 cd ios
+pod repo update
 pod install
 ```
 
 ### If following warning related to "initialize an object with an unknown UDID" occurs during pod install
 ```bash
 pod deintegrate Runner.xcodeproj
+pod repo update
 pod install
 ```
 

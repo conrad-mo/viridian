@@ -50,21 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDaorbVTgQ_7kAXhDz0TOlB-Kf-UMjEfNM',
-    appId: '1:26141715129:android:a674d86643d09bb1c4c968',
-    messagingSenderId: '26141715129',
-    projectId: 'textsync-e2f51',
-    storageBucket: 'textsync-e2f51.appspot.com',
+    apiKey: 'AIzaSyBX4oeYoNHtUYXZzc-3oq6A7GiSrAVn4qY',
+    appId: '1:177297003700:android:3b1ff87c4fa9ea506773e1',
+    messagingSenderId: '177297003700',
+    projectId: 'viridian-d29fa',
+    storageBucket: 'viridian-d29fa.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBtzj9HGNf6jUmCqVi_3kBQl-hhO-D7osk',
-    appId: '1:26141715129:ios:7171893e94873b47c4c968',
-    messagingSenderId: '26141715129',
-    projectId: 'textsync-e2f51',
-    storageBucket: 'textsync-e2f51.appspot.com',
-    androidClientId: '26141715129-n13j299gu1b6vm8qtlnj14vtfs0nite1.apps.googleusercontent.com',
-    iosClientId: '26141715129-6a1ho8kgpchh25m0e037tmuuhqo0pkn8.apps.googleusercontent.com',
-    iosBundleId: 'com.conradmo.textsync',
+    apiKey: 'AIzaSyDPjLJmh7nSSkmZOaXerzvCQ-HfeFjpo7w',
+    appId: '1:177297003700:ios:9c80ebb18a1bbf146773e1',
+    messagingSenderId: '177297003700',
+    projectId: 'viridian-d29fa',
+    storageBucket: 'viridian-d29fa.appspot.com',
+    androidClientId: '177297003700-ub3l1rjoufpuoeuloqmtgm7ua1iee8jr.apps.googleusercontent.com',
+    iosClientId: '177297003700-bc646evem4166is65kl9e26fspc388e7.apps.googleusercontent.com',
+    iosBundleId: 'com.conradmo.viridian',
   );
 }

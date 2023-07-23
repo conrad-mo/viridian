@@ -1,40 +1,40 @@
 {
   "project_info": {
-    "project_number": "26141715129",
-    "project_id": "textsync-e2f51",
-    "storage_bucket": "textsync-e2f51.appspot.com"
+    "project_number": "177297003700",
+    "project_id": "viridian-d29fa",
+    "storage_bucket": "viridian-d29fa.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:26141715129:android:a674d86643d09bb1c4c968",
+        "mobilesdk_app_id": "1:177297003700:android:3b1ff87c4fa9ea506773e1",
         "android_client_info": {
-          "package_name": "com.conradmo.textsync"
+          "package_name": "com.conradmo.viridian"
         }
       },
       "oauth_client": [
         {
-          "client_id": "26141715129-muj6qsh3ej4uo44hehld3t10eabki4ga.apps.googleusercontent.com",
+          "client_id": "177297003700-7g8ht3kuqh39nba9id7bjcdius0osrtp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDaorbVTgQ_7kAXhDz0TOlB-Kf-UMjEfNM"
+          "current_key": "AIzaSyBX4oeYoNHtUYXZzc-3oq6A7GiSrAVn4qY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "26141715129-muj6qsh3ej4uo44hehld3t10eabki4ga.apps.googleusercontent.com",
+              "client_id": "177297003700-7g8ht3kuqh39nba9id7bjcdius0osrtp.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "26141715129-6a1ho8kgpchh25m0e037tmuuhqo0pkn8.apps.googleusercontent.com",
+              "client_id": "177297003700-kr2f3g6k6ogjj71vr241sq7enl6epcvi.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.conradmo.textsync"
+                "bundle_id": "com.example.viridian"
               }
             }
           ]
