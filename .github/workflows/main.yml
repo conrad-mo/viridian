@@ -28,9 +28,9 @@ jobs:
         flutter pub get
     - run: flutter build ios --release --no-codesign -v
     - run: |
-        mkdir /Users/runner/work/viridian/viridianbuild/ios/iphoneos/Payload
-        cp -r /Users/runner/work/viridian/viridianbuild/ios/iphoneos/Runner.app /Users/runner/work/viridian/viridianbuild/ios/iphoneos/Payload/
-        cd /Users/runner/work/viridian/viridianbuild/ios/iphoneos/
+        mkdir /Users/runner/work/viridian/viridian/build/ios/iphoneos/Payload
+        cp -r /Users/runner/work/viridian/viridian/build/ios/iphoneos/Runner.app /Users/runner/work/viridian/viridianbuild/ios/iphoneos/Payload/
+        cd /Users/runner/work/viridian/viridian/build/ios/iphoneos/
         zip -r Payload.zip Payload
         mv Payload.zip Viridian.ipa
     - id: flutter-action
@@ -48,7 +48,7 @@ jobs:
       with:
         name: Viridian.ipa
         path: |
-          /Users/runner/work/viridian/viridianbuild/ios/iphoneos/Viridian.ipa
+          /Users/runner/work/viridian/viridian/build/ios/iphoneos/Viridian.ipa
     - uses: IsaacShelton/update-existing-release@v1.3.1
       with:
         token: ${{secrets.GITHUB_TOKEN}}
@@ -57,7 +57,7 @@ jobs:
         prerelease: true
         replace: true
         files: >
-          /Users/runner/work/viridian/viridianbuild/ios/iphoneos/Viridian.ipa
+          /Users/runner/work/viridian/viridian/build/ios/iphoneos/Viridian.ipa
 
   android:
     name: Build android application
@@ -93,7 +93,7 @@ jobs:
       with:
         name: Android Binaries
         path: |
-          /Users/runner/work/viridian/viridianbuild/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
-          /Users/runner/work/viridian/viridianbuild/app/outputs/flutter-apk/app-arm64-v8a-release.apk
-          /Users/runner/work/viridian/viridianbuild/app/outputs/flutter-apk/app-x86_64-release.apk
-          /Users/runner/work/viridian/viridianbuild/app/outputs/bundle/release/app-release.aab
+          /Users/runner/work/viridian/viridian/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+          /Users/runner/work/viridian/viridian/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+          /Users/runner/work/viridian/viridian/build/app/outputs/flutter-apk/app-x86_64-release.apk
+          /Users/runner/work/viridian/viridian/build/app/outputs/bundle/release/app-release.aab
