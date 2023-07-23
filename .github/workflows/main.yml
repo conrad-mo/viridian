@@ -28,11 +28,11 @@ jobs:
         flutter pub get
     - run: flutter build ios --release --no-codesign -v
     - run: |
-        mkdir /Users/runner/work/textsync/textsync/build/ios/iphoneos/Payload
-        cp -r /Users/runner/work/textsync/textsync/build/ios/iphoneos/Runner.app /Users/runner/work/textsync/textsync/build/ios/iphoneos/Payload/
-        cd /Users/runner/work/textsync/textsync/build/ios/iphoneos/
+        mkdir /Users/runner/work/veridian/veridian/build/ios/iphoneos/Payload
+        cp -r /Users/runner/work/veridian/veridian/build/ios/iphoneos/Runner.app /Users/runner/work/veridian/veridian/build/ios/iphoneos/Payload/
+        cd /Users/runner/work/veridian/veridian/build/ios/iphoneos/
         zip -r Payload.zip Payload
-        mv Payload.zip TextSync.ipa
+        mv Payload.zip Veridian.ipa
     - id: flutter-action
       uses: subosito/flutter-action@v2
       with:
@@ -46,9 +46,9 @@ jobs:
       shell: bash
     - uses: actions/upload-artifact@v3
       with:
-        name: TextSync.ipa
+        name: Veridian.ipa
         path: |
-          /Users/runner/work/textsync/textsync/build/ios/iphoneos/TextSync.ipa
+          /Users/runner/work/veridian/veridian/build/ios/iphoneos/Veridian.ipa
     - uses: IsaacShelton/update-existing-release@v1.3.1
       with:
         token: ${{secrets.GITHUB_TOKEN}}
@@ -57,7 +57,7 @@ jobs:
         prerelease: true
         replace: true
         files: >
-          /Users/runner/work/textsync/textsync/build/ios/iphoneos/TextSync.ipa
+          /Users/runner/work/veridian/veridian/build/ios/iphoneos/Veridian.ipa
 
   android:
     name: Build android application
@@ -93,7 +93,7 @@ jobs:
       with:
         name: Android Binaries
         path: |
-          /Users/runner/work/textsync/textsync/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
-          /Users/runner/work/textsync/textsync/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
-          /Users/runner/work/textsync/textsync/build/app/outputs/flutter-apk/app-x86_64-release.apk
-          /Users/runner/work/textsync/textsync/build/app/outputs/bundle/release/app-release.aab
+          /Users/runner/work/veridian/veridian/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+          /Users/runner/work/veridian/veridian/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+          /Users/runner/work/veridian/veridian/build/app/outputs/flutter-apk/app-x86_64-release.apk
+          /Users/runner/work/veridian/veridian/build/app/outputs/bundle/release/app-release.aab
