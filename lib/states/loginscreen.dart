@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextFormField(
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Email Address *'),
+                        labelText: 'Email Address'),
                     onChanged: (val) {
                       setState(() {
                         email = val;
@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       return RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
                               .hasMatch(val!)
                           ? null
-                          : 'Invalid Email';
+                          : 'Invalid Email Format';
                     }),
                 const SizedBox(
                   height: 15,
@@ -53,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextFormField(
                   obscureText: true,
                   decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'Password *'),
+                      border: OutlineInputBorder(), labelText: 'Password'),
                   onChanged: (val) {
                     setState(() {
                       password = val;
@@ -72,7 +72,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(
                   width: double.infinity,
-                  child: FilledButton(onPressed: login, child: Text('Log In')),
+                  child: FilledButton(
+                      onPressed: login, child: const Text('Log In')),
                 ),
                 const SizedBox(
                   height: 15,
@@ -81,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   child: FilledButton.tonal(
                     onPressed: login,
-                    child: Text('Sign Up'),
+                    child: const Text('No account? Sign Up'),
                   ),
                 ),
               ],
