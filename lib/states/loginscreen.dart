@@ -17,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       //resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(24, 24, 24, 32),
+        padding: const EdgeInsets.fromLTRB(24, 10, 24, 32),
         child: SafeArea(
           child: Form(
             key: _formKey,
@@ -71,14 +71,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 15,
                 ),
                 SizedBox(
-                  width: 10000,
+                  width: double.infinity,
                   child: FilledButton(onPressed: login, child: Text('Log In')),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 SizedBox(
-                  width: 10000,
+                  width: double.infinity,
                   child: FilledButton.tonal(
                     onPressed: login,
                     child: Text('Sign Up'),
