@@ -9,7 +9,7 @@ on:
 
 jobs:
   android:
-    name: Build android application
+    name: Lint flutter app
     runs-on: ubuntu-latest
 
     steps:
