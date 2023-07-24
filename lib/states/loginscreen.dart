@@ -11,8 +11,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   String email = "";
   String password = "";
-  bool _emailnotvalid = false;
-  bool _pwnotvalid = false;
   bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
@@ -32,21 +30,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: TextStyle(fontSize: 50),
                 ),
                 const SizedBox(
-                  height: 50,
+                  height: 25,
                 ),
                 TextFormField(
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Email Address *'),
-                    //errorText: _emailnotvalid ? 'Invalid email' : null)
                     onChanged: (val) {
                       setState(() {
                         email = val;
                       });
                     },
                     validator: (val) {
-                      return RegExp(
-                                  r"/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/")
+                      return RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
                               .hasMatch(val!)
                           ? null
                           : 'Invalid Email';
@@ -58,7 +54,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   obscureText: true,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(), labelText: 'Password *'),
-                  //errorText: _pwnotvalid ? 'Invalid password' : null),
                   onChanged: (val) {
                     setState(() {
                       password = val;
@@ -66,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   validator: (val) {
                     if (val!.length < 6) {
-                      return "Invalid password length, must be longer than 6 characters";
+                      return "Invalid password length";
                     } else {
                       return null;
                     }
@@ -75,7 +70,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                FilledButton(onPressed: login, child: const Text('Log In')),
+                SizedBox(
+                  width: 10000,
+                  child: FilledButton(onPressed: login, child: Text('Log In')),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                SizedBox(
+                  width: 10000,
+                  child: FilledButton.tonal(
+                    onPressed: login,
+                    child: Text('Sign Up'),
+                  ),
+                ),
               ],
             ),
           ),
