@@ -1,4 +1,5 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
+import 'package:viridian/states/signupscreen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -9,9 +10,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  String email = "";
-  String password = "";
-  bool _isLoading = false;
+  String email = '';
+  String password = '';
+  //final bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Text(
-                  "Viridian",
+                  'Viridian',
                   style: TextStyle(fontSize: 50),
                 ),
                 const SizedBox(
@@ -61,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   validator: (val) {
                     if (val!.length < 6) {
-                      return "Invalid password length";
+                      return 'Invalid password length';
                     } else {
                       return null;
                     }
@@ -81,7 +82,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: FilledButton.tonal(
-                    onPressed: login,
+                    onPressed: () => {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignupScreen())),
+                    },
                     child: const Text('No account? Sign Up'),
                   ),
                 ),

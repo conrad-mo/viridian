@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
       darkTheme: ThemeData(
           useMaterial3: true, colorScheme: colorscheme.darkColorScheme),
       themeMode: ThemeMode.system,
-      home: _isLoggedIn ? HomeScreen() : LoginScreen(),
+      home: _isLoggedIn ? const HomeScreen() : const LoginScreen(),
     );
   }
 }
