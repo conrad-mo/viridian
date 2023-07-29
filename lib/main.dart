@@ -30,7 +30,9 @@ class _MyAppState extends State<MyApp> {
   getUserStatus() async {
     await UserClass.getUserStatus().then((value) {
       if (value != null) {
-        _isLoggedIn = value;
+        setState(() {
+          _isLoggedIn = value;
+        });
       }
     });
   }

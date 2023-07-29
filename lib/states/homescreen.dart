@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:viridian/backend/auth.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -8,10 +9,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  AuthService authService = AuthService();
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('Home')),
+    return Scaffold(
+      body: Center(
+          child: ElevatedButton(
+              onPressed: () {
+                authService.signOut();
+              },
+              child: Text('Logout'))),
     );
   }
 }
