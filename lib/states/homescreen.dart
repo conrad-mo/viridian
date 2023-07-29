@@ -16,7 +16,11 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('Viridian'),
         actions: <Widget>[
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search))
+          IconButton(
+              onPressed: () {
+                authService.signOut();
+              },
+              icon: const Icon(Icons.search)),
         ],
       ),
       body: ListView(
