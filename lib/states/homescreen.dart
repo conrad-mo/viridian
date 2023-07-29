@@ -13,12 +13,28 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: ElevatedButton(
-              onPressed: () {
-                authService.signOut();
-              },
-              child: Text('Logout'))),
+      appBar: AppBar(
+        title: const Text('Viridian'),
+        actions: <Widget>[
+          IconButton(onPressed: () {}, icon: const Icon(Icons.search))
+        ],
+      ),
+      body: ListView(
+        children: <Widget>[
+          ListTile(
+            leading: CircleAvatar(child: Text('C')),
+            title: Text('Conrad'),
+            subtitle: Text('Supporting text'),
+            //trailing: Icon(Icons.favorite_rounded),
+            onTap: () {},
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton.large(
+        onPressed: () {},
+        child: const Icon(Icons.edit),
+      ),
     );
   }
 }
+//authService.signOut
