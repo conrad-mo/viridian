@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:viridian/backend/auth.dart';
+import 'package:viridian/states/acccountscreen.dart';
 import 'package:viridian/states/searchscreen.dart';
 import 'package:viridian/userclass.dart';
+
+import 'loginscreen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
   AuthService authService = AuthService();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getUserData();
   }
@@ -60,11 +62,18 @@ class _HomeScreenState extends State<HomeScreen> {
             //trailing: Icon(Icons.favorite_rounded),
             onTap: () {},
           ),
+          ListTile(
+            leading: CircleAvatar(child: Text('C')),
+            title: Text('Conrad'),
+            subtitle: Text('Supporting text'),
+            //trailing: Icon(Icons.favorite_rounded),
+            onTap: () {},
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton.large(
         onPressed: () {},
-        child: const Icon(Icons.edit),
+        child: const Icon(Icons.edit_outlined),
       ),
       drawer: Drawer(
         child: SafeArea(
@@ -78,19 +87,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 username,
                 textAlign: TextAlign.center,
               ),
+              const SizedBox(
+                height: 30,
+              ),
               const ListTile(
                 leading: Icon(Icons.chat),
+                selected: true,
                 title: Text(
                   'Chats',
                   textAlign: TextAlign.left,
                 ),
               ),
-              const ListTile(
-                leading: Icon(Icons.account_circle),
-                title: Text(
+              ListTile(
+                leading: const Icon(Icons.account_circle),
+                title: const Text(
                   'Account',
                   textAlign: TextAlign.left,
                 ),
+                onTap: () async {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AccountScreen(
+                                email: email,
+                                username: username,
+                              )));
+                },
               ),
               ListTile(
                 leading: const Icon(Icons.logout),
@@ -98,7 +120,36 @@ class _HomeScreenState extends State<HomeScreen> {
                   'Logout',
                   textAlign: TextAlign.left,
                 ),
-                onTap: () => {authService.signOut()},
+                onTap: () => {
+                  showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                            //icon: const Icon(Icons.logout),
+                            title: const Text('Logout?'),
+                            content:
+                                const Text('Are you sure you want to log out?'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(context, 'Cancel'),
+                                child: const Text('Cancel'),
+                              ),
+                              FilledButton.tonal(
+                                onPressed: () => {
+                                  authService.signOut().whenComplete(() {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const LoginScreen()));
+                                  })
+                                },
+                                child: const Text('Logout'),
+                              ),
+                            ],
+                          ))
+                },
               ),
             ],
           ),
