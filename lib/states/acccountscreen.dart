@@ -1,20 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:viridian/states/homescreen.dart';
-
+import 'package:package_info_plus/package_info_plus.dart';
 import '../backend/auth.dart';
 import 'loginscreen.dart';
 
 class AccountScreen extends StatefulWidget {
   String username;
   String email;
-  AccountScreen({super.key, required this.email, required this.username});
-
+  AccountScreen({
+    super.key,
+    required this.email,
+    required this.username,
+  });
   @override
   State<AccountScreen> createState() => _AccountScreenState();
 }
 
 class _AccountScreenState extends State<AccountScreen> {
   AuthService authService = AuthService();
+  String version = '';
+  String buildnumber = '';
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getVersion();
+  }
+
+  getVersion() async {
+    await PackageInfo.fromPlatform().then((value) {
+      setState(() {
+        version = value.version;
+        buildnumber = value.buildNumber;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,17 +121,31 @@ class _AccountScreenState extends State<AccountScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(24, 32, 24, 32),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              widget.username,
-              style: TextStyle(fontSize: 40),
-              textAlign: TextAlign.center,
-            )
-          ],
+        padding: const EdgeInsets.fromLTRB(24, 10, 24, 32),
+        child: Align(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              const Icon(
+                Icons.account_circle,
+                size: 100,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                widget.username,
+                style: const TextStyle(fontSize: 30),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                widget.email,
+                style: const TextStyle(fontSize: 15),
+              ),
+              const Spacer(),
+              Text('Version $version'),
+              Text('Build Number: $buildnumber'),
+            ],
+          ),
         ),
       ),
     );

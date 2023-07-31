@@ -56,18 +56,18 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView(
         children: <Widget>[
           ListTile(
-            leading: CircleAvatar(child: Text('C')),
-            title: Text('Conrad'),
-            subtitle: Text('Supporting text'),
+            leading: const CircleAvatar(child: Text('C')),
+            title: const Text('Conrad'),
+            subtitle: const Text('Supporting text'),
             //trailing: Icon(Icons.favorite_rounded),
-            onTap: () {},
+            onTap: () => {print('tapped')},
           ),
           ListTile(
-            leading: CircleAvatar(child: Text('C')),
-            title: Text('Conrad'),
-            subtitle: Text('Supporting text'),
+            leading: const CircleAvatar(child: Text('C')),
+            title: const Text('Conrad'),
+            subtitle: const Text('Supporting text'),
             //trailing: Icon(Icons.favorite_rounded),
-            onTap: () {},
+            onTap: () => {print('tapped')},
           ),
         ],
       ),
