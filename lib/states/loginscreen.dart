@@ -125,8 +125,10 @@ class _LoginScreenState extends State<LoginScreen> {
             await UserClass.saveUserTokenStatus(true);
             await UserClass.saveUserEmailStatus(email);
             await UserClass.saveUserNameStatus(snapshot.docs[0]['username']);
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => const HomeScreen()));
+            if (context.mounted) {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
+            }
           } else {
             setState(() {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(

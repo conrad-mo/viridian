@@ -22,7 +22,6 @@ class _AccountScreenState extends State<AccountScreen> {
   String buildnumber = '';
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getVersion();
   }

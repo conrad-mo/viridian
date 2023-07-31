@@ -7,13 +7,13 @@ class DatabaseService {
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('users');
   final CollectionReference groupCollection =
-      FirebaseFirestore.instance.collection('groups');
+      FirebaseFirestore.instance.collection('chats');
 
   Future saveUserData(String username, String email) async {
     return await userCollection.doc(uid).set({
       'username': username,
       'email': email,
-      'groups': [],
+      'chats': [],
       'profilePic': '',
       'uid': uid,
     });
@@ -23,5 +23,29 @@ class DatabaseService {
     QuerySnapshot snapshot =
         await userCollection.where('email', isEqualTo: email).get();
     return snapshot;
+  }
+
+  getUserChats() async {
+    return userCollection.doc(uid).snapshots();
+  }
+
+  Future createNewChat(String username, String id, String chatname) async {
+    DocumentReference chatdocumentReference = await groupCollection.add({
+      'chatname': chatname,
+      'chaticon': '',
+      'admin': '${id}_$username',
+      'members': [],
+      'chatid': '',
+      'recentMessage': '',
+      'recentSender': '',
+    });
+    await chatdocumentReference.update({
+      'members': FieldValue.arrayUnion(['${uid}_$username']),
+      'chatid': chatdocumentReference.id,
+    });
+    DocumentReference userDocumentReference = userCollection.doc(uid);
+    return await userDocumentReference.update({
+      'chats': FieldValue.arrayUnion(['${chatdocumentReference.id}_$chatname'])
+    });
   }
 }
