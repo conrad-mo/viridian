@@ -66,4 +66,8 @@ class DatabaseService {
   getChatUsers(String chatid) async {
     return groupCollection.doc(chatid).snapshots();
   }
+
+  searchByName(String chatname) {
+    return groupCollection.where("chatname", isEqualTo: chatname).get();
+  }
 }
