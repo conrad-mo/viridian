@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:viridian/states/chatscreen.dart';
 
 class ChatTile extends StatefulWidget {
   final String username;
@@ -18,6 +19,18 @@ class _ChatTileState extends State<ChatTile> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () => {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChatScreen(
+              username: widget.username,
+              chatid: widget.chatid,
+              chatname: widget.chatname,
+            ),
+          ),
+        )
+      },
       leading: CircleAvatar(
         child: Text(widget.chatname.substring(0, 1).toUpperCase()),
       ),

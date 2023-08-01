@@ -48,4 +48,22 @@ class DatabaseService {
       'chats': FieldValue.arrayUnion(['${chatdocumentReference.id}_$chatname'])
     });
   }
+
+  getTexts(String chatid) async {
+    return groupCollection
+        .doc(chatid)
+        .collection('texts')
+        .orderBy('time')
+        .snapshots();
+  }
+
+  Future getChatAdmin(String chatid) async {
+    DocumentReference documentReference = groupCollection.doc(chatid);
+    DocumentSnapshot documentSnapshot = await documentReference.get();
+    return documentSnapshot['admin'];
+  }
+
+  getChatUsers(String chatid) async {
+    return groupCollection.doc(chatid).snapshots();
+  }
 }

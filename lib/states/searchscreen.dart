@@ -10,6 +10,23 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Search'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(24, 10, 24, 32),
+        child: Column(
+          children: [
+            TextFormField(
+              decoration: const InputDecoration(
+                  filled: true,
+                  labelText: 'Search',
+                  suffix: Icon(Icons.search)),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
