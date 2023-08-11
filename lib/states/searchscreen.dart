@@ -123,8 +123,24 @@ class _SearchScreenState extends State<SearchScreen> {
           title: Text(chatname),
           subtitle: Text(admin.substring(admin.indexOf('_') + 1)),
           trailing: _isJoined
-              ? const FilledButton(onPressed: null, child: Text('Joined'))
-              : FilledButton(onPressed: search, child: const Text('Join'))),
+              ? FilledButton.tonal(
+                  onPressed: () async {
+                    await DatabaseService(uid: user!.uid)
+                        .chatToggle(chatid, username, chatname);
+                    setState(() {
+                      _isJoined = !_isJoined;
+                    });
+                  },
+                  child: const Text('Joined'))
+              : FilledButton(
+                  onPressed: () async {
+                    await DatabaseService(uid: user!.uid)
+                        .chatToggle(chatid, username, chatname);
+                    setState(() {
+                      _isJoined = !_isJoined;
+                    });
+                  },
+                  child: const Text('Join'))),
     );
   }
 }

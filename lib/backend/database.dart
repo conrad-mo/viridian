@@ -82,4 +82,26 @@ class DatabaseService {
       return false;
     }
   }
+
+  Future chatToggle(String chatid, String username, String chatname) async {
+    DocumentReference userDocumentReference = userCollection.doc(uid);
+    DocumentReference groupDocumentReference = groupCollection.doc(chatid);
+    DocumentSnapshot documentSnapshot = await userDocumentReference.get();
+    List<dynamic> chats = await documentSnapshot['chats'];
+    if (chats.contains('${chatid}_$chatname')) {
+      await userDocumentReference.update({
+        'chats': FieldValue.arrayRemove(['${chatid}_$chatname'])
+      });
+      await groupDocumentReference.update({
+        'members': FieldValue.arrayRemove(['${uid}_$username'])
+      });
+    } else {
+      await userDocumentReference.update({
+        'chats': FieldValue.arrayUnion(['${chatid}_$chatname'])
+      });
+      await groupDocumentReference.update({
+        'members': FieldValue.arrayUnion(['${uid}_$username'])
+      });
+    }
+  }
 }
