@@ -197,9 +197,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return StreamBuilder(
       stream: chats,
       builder: (context, AsyncSnapshot snapshot) {
-        print(snapshot);
-        print(snapshot.hasData);
-
         if (snapshot.hasData) {
           if (snapshot.data['chats'] != null &&
               snapshot.data['chats'].length != 0) {

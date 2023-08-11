@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:viridian/backend/database.dart';
+import 'package:viridian/userclass.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -15,7 +17,23 @@ class _SearchScreenState extends State<SearchScreen> {
   bool _searched = false;
   bool _isLoading = false;
   String username = '';
-  
+  User? user;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserInfo();
+  }
+
+  getUserInfo() async {
+    await UserClass.getUserName().then((value) {
+      setState(() {
+        username = value!;
+      });
+    });
+    user = FirebaseAuth.instance.currentUser;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +43,7 @@ class _SearchScreenState extends State<SearchScreen> {
       body: Padding(
         padding: const EdgeInsets.fromLTRB(24, 10, 24, 32),
         child: Column(
-          children: [
+          children: <Widget>[
             TextFormField(
               controller: searchController,
               decoration: InputDecoration(
@@ -36,7 +54,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     icon: const Icon(Icons.search)),
               ),
             ),
-            _isLoading ? const Center(child: CircularProgressIndicator(),) : 
+            _isLoading
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : chatlist(),
           ],
         ),
       ),
@@ -44,11 +66,13 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   search() async {
-    if (searchController.text.isEmpty){
+    if (searchController.text.isEmpty) {
       setState(() {
         _isLoading = true;
       });
-      await DatabaseService().searchByName(searchController.text).then((snapshot){
+      await DatabaseService()
+          .searchByName(searchController.text)
+          .then((snapshot) {
         setState(() {
           searchSnapshot = snapshot;
           _isLoading = false;
@@ -57,15 +81,24 @@ class _SearchScreenState extends State<SearchScreen> {
       });
     }
   }
-  chatlist(){
-    return _searched ? ListView.builder(shrinkWrap: true,
-    itemCount: searchSnapshot!.docs.length,
-    itemBuilder: (context, index){
-      return newChatTile(username, chatid, chatname, admin)
-    }) : Container();
+
+  chatlist() {
+    return _searched
+        ? ListView.builder(
+            shrinkWrap: true,
+            itemCount: searchSnapshot!.docs.length,
+            itemBuilder: (context, index) {
+              return newChatTile(
+                  username,
+                  searchSnapshot!.docs[index]['chatid'],
+                  searchSnapshot!.docs[index]['chatname'],
+                  searchSnapshot!.docs[index]['admin']);
+            })
+        : Container();
   }
-  Widget newChatTile(String username, String chatid, String chatname, String admin){
-    return Text('hello')
+
+  Widget newChatTile(
+      String username, String chatid, String chatname, String admin) {
+    return const Text('hello');
   }
-  
 }

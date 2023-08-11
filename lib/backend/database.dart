@@ -68,6 +68,6 @@ class DatabaseService {
   }
 
   searchByName(String chatname) {
-    return groupCollection.where("chatname", isEqualTo: chatname).get();
+    return groupCollection.where('chatname', isEqualTo: chatname).get();
   }
 }
