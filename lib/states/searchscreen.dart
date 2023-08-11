@@ -18,6 +18,7 @@ class _SearchScreenState extends State<SearchScreen> {
   bool _isLoading = false;
   String username = '';
   User? user;
+  bool _isJoined = false;
 
   @override
   void initState() {
@@ -53,6 +54,9 @@ class _SearchScreenState extends State<SearchScreen> {
                     onPressed: () => {search()},
                     icon: const Icon(Icons.search)),
               ),
+            ),
+            SizedBox(
+              height: 20,
             ),
             _isLoading
                 ? const Center(
@@ -97,8 +101,30 @@ class _SearchScreenState extends State<SearchScreen> {
         : Container();
   }
 
+  joined(String username, String chatid, String chatname, String admin) async {
+    await DatabaseService(uid: user!.uid)
+        .checkJoined(chatname, chatid, username)
+        .then((value) {
+      setState(() {
+        _isJoined = value;
+      });
+    });
+  }
+
   Widget newChatTile(
       String username, String chatid, String chatname, String admin) {
-    return const Text('hello');
+    joined(username, chatid, chatname, admin);
+    return Align(
+      alignment: Alignment.center,
+      child: ListTile(
+          leading: CircleAvatar(
+            child: Text(chatname.substring(0, 1).toUpperCase()),
+          ),
+          title: Text(chatname),
+          subtitle: Text(admin.substring(admin.indexOf('_') + 1)),
+          trailing: _isJoined
+              ? const FilledButton(onPressed: null, child: Text('Joined'))
+              : FilledButton(onPressed: search, child: const Text('Join'))),
+    );
   }
 }

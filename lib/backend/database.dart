@@ -70,4 +70,16 @@ class DatabaseService {
   searchByName(String chatname) {
     return groupCollection.where('chatname', isEqualTo: chatname).get();
   }
+
+  Future<bool> checkJoined(
+      String chatname, String chatid, String username) async {
+    DocumentReference userDocumentReference = userCollection.doc(uid);
+    DocumentSnapshot documentSnapshot = await userDocumentReference.get();
+    List<dynamic> chats = await documentSnapshot['chats'];
+    if (chats.contains('${chatid}_$chatname')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
