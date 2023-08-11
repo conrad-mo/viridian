@@ -66,7 +66,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   search() async {
-    if (searchController.text.isEmpty) {
+    if (searchController.text.isNotEmpty) {
       setState(() {
         _isLoading = true;
       });
