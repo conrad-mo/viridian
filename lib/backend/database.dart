@@ -125,7 +125,7 @@ class DatabaseService {
     String chatid,
     Map<String, dynamic> textMessageData,
   ) async {
-    groupCollection.doc(chatid).collection('messages').add(textMessageData);
+    groupCollection.doc(chatid).collection('texts').add(textMessageData);
     groupCollection.doc(chatid).update({
       'recentMessage': textMessageData['message'],
       'recentSender': textMessageData['sender'],

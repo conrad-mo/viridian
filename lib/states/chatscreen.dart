@@ -97,6 +97,7 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   textMessages() {
+    //print(Theme.of(context).brightness == Brightness.dark);
     return StreamBuilder(
       stream: texts,
       builder: (context, AsyncSnapshot snapshot) {
@@ -123,7 +124,6 @@ class _ChatScreenState extends State<ChatScreen> {
         'sender': widget.username,
         'time': DateTime.now().millisecondsSinceEpoch,
       };
-
       DatabaseService().sendText(widget.chatid, chatMessageMap);
       setState(() {
         messageController.clear();

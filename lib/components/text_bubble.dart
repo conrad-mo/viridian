@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:viridian/color_schemes.g.dart';
 
 class TextBubble extends StatefulWidget {
   final String message;
@@ -17,6 +18,20 @@ class TextBubble extends StatefulWidget {
 class _TextBubbleState extends State<TextBubble> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          color: Theme.of(context).brightness == Brightness.dark
+              ? widget.amISender
+                  ? darkColorScheme.primary
+                  : darkColorScheme.secondary
+              : widget.amISender
+                  ? lightColorScheme.primary
+                  : lightColorScheme.secondary),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [Text(widget.sender)],
+      ),
+    );
   }
 }
