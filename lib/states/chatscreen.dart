@@ -89,7 +89,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   IconButton(onPressed: sendText, icon: const Icon(Icons.send))
                 ]),
               ),
-            )
+            ),
           ],
         ),
       ),
