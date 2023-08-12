@@ -87,14 +87,21 @@ class DatabaseService {
     DocumentReference userDocumentReference = userCollection.doc(uid);
     DocumentReference groupDocumentReference = groupCollection.doc(chatid);
     DocumentSnapshot documentSnapshot = await userDocumentReference.get();
+
     List<dynamic> chats = await documentSnapshot['chats'];
     if (chats.contains('${chatid}_$chatname')) {
       await userDocumentReference.update({
         'chats': FieldValue.arrayRemove(['${chatid}_$chatname'])
       });
+      print('${uid}_$username');
       await groupDocumentReference.update({
         'members': FieldValue.arrayRemove(['${uid}_$username'])
       });
+      DocumentSnapshot chatSnapshot = await groupDocumentReference.get();
+      Map<String, dynamic> data = chatSnapshot.data() as Map<String, dynamic>;
+      if (data['members'].isEmpty) {
+        await groupDocumentReference.delete();
+      }
     } else {
       await userDocumentReference.update({
         'chats': FieldValue.arrayUnion(['${chatid}_$chatname'])
@@ -102,6 +109,15 @@ class DatabaseService {
       await groupDocumentReference.update({
         'members': FieldValue.arrayUnion(['${uid}_$username'])
       });
+    }
+  }
+
+  deleteChat(String chatid) async {
+    DocumentReference groupDocumentReference = groupCollection.doc(chatid);
+    DocumentSnapshot chatSnapshot = await groupDocumentReference.get();
+    Map<String, dynamic> data = chatSnapshot.data() as Map<String, dynamic>;
+    if (data['members'].isEmpty) {
+      await groupDocumentReference.delete();
     }
   }
 }

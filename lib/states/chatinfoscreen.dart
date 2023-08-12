@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:viridian/backend/database.dart';
+import 'package:viridian/states/homescreen.dart';
 
 class ChatInfoScreen extends StatefulWidget {
   final String chatid;
@@ -18,10 +20,11 @@ class ChatInfoScreen extends StatefulWidget {
 
 class _ChatInfoScreenState extends State<ChatInfoScreen> {
   Stream? users;
+  User? user;
   @override
   void initState() {
     getUsers();
-    // TODO: implement initState
+    user = FirebaseAuth.instance.currentUser;
     super.initState();
   }
 
@@ -44,7 +47,51 @@ class _ChatInfoScreenState extends State<ChatInfoScreen> {
           centerTitle: true,
           title: const Text('Group Chat Info'),
           actions: [
-            IconButton(onPressed: () => {}, icon: const Icon(Icons.exit_to_app))
+            IconButton(
+                onPressed: () => {
+                      showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                                icon: const Icon(Icons.logout),
+                                title: const Text('Exit'),
+                                content: const Text(
+                                    'Are you sure you want to leave?'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(context, 'Cancel'),
+                                    child: const Text('Cancel'),
+                                  ),
+                                  FilledButton.tonal(
+                                    onPressed: () async {
+                                      DatabaseService(uid: user!.uid)
+                                          .chatToggle(
+                                              widget.chatid,
+                                              widget.adminname.substring(widget
+                                                      .adminname
+                                                      .indexOf('_') +
+                                                  1),
+                                              widget.chatname)
+                                          .whenComplete(() {
+                                        Navigator.of(context)
+                                            .pushAndRemoveUntil(
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const HomeScreen()),
+                                                (Route<dynamic> route) => false)
+                                            .whenComplete(() async {
+                                          await DatabaseService(uid: user!.uid)
+                                              .deleteChat(widget.chatid);
+                                        });
+                                      });
+                                    },
+                                    child: const Text('Leave'),
+                                  ),
+                                ],
+                              ))
+                    },
+                icon: const Icon(Icons.exit_to_app))
           ],
         ),
         body: Align(

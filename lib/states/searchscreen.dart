@@ -55,7 +55,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     icon: const Icon(Icons.search)),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             _isLoading
