@@ -48,7 +48,6 @@ class _SearchScreenState extends State<SearchScreen> {
             TextFormField(
               controller: searchController,
               decoration: InputDecoration(
-                filled: true,
                 labelText: 'Enter name',
                 suffix: IconButton(
                     onPressed: () => {search()},
