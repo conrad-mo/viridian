@@ -93,7 +93,6 @@ class DatabaseService {
       await userDocumentReference.update({
         'chats': FieldValue.arrayRemove(['${chatid}_$chatname'])
       });
-      print('${uid}_$username');
       await groupDocumentReference.update({
         'members': FieldValue.arrayRemove(['${uid}_$username'])
       });

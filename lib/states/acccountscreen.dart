@@ -5,9 +5,9 @@ import '../backend/auth.dart';
 import 'loginscreen.dart';
 
 class AccountScreen extends StatefulWidget {
-  String username;
-  String email;
-  AccountScreen({
+  final String username;
+  final String email;
+  const AccountScreen({
     super.key,
     required this.email,
     required this.username,

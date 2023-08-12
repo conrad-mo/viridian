@@ -10,10 +10,8 @@ class AuthService {
       User user = (await firebaseAuth.createUserWithEmailAndPassword(
               email: email, password: password))
           .user!;
-      if (user != null) {
-        await DatabaseService(uid: user.uid).saveUserData(username, email);
-        return true;
-      }
+      await DatabaseService(uid: user.uid).saveUserData(username, email);
+      return true;
     } on FirebaseAuthException catch (e) {
       return e.message;
     }
@@ -32,12 +30,10 @@ class AuthService {
 
   Future userLogin(String email, String password) async {
     try {
-      User user = (await firebaseAuth.signInWithEmailAndPassword(
+      (await firebaseAuth.signInWithEmailAndPassword(
               email: email, password: password))
           .user!;
-      if (user != null) {
-        return true;
-      }
+      return true;
     } on FirebaseAuthException catch (e) {
       return e.message;
     }

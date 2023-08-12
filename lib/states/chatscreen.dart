@@ -21,16 +21,12 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   TextEditingController messageController = TextEditingController();
-  final ScrollController _scrollController = ScrollController();
   Stream<QuerySnapshot>? texts;
   String admin = '';
   @override
   void initState() {
     retrieveChatAdmin();
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
-    });
   }
 
   retrieveChatAdmin() {
@@ -72,7 +68,7 @@ class _ChatScreenState extends State<ChatScreen> {
         child: Column(
           children: <Widget>[
             Expanded(
-              child: textMessages(_scrollController),
+              child: textMessages(),
             ),
             Container(
               alignment: Alignment.bottomCenter,
@@ -102,18 +98,17 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  textMessages(ScrollController scrollController) {
+  textMessages() {
     //print(Theme.of(context).brightness == Brightness.dark);
     return SingleChildScrollView(
       reverse: true,
-      controller: scrollController,
       //physics: ScrollPhysics(),
       child: StreamBuilder(
         stream: texts,
         builder: (context, AsyncSnapshot snapshot) {
           return snapshot.hasData
               ? ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   //scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: snapshot.data.docs.length,
