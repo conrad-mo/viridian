@@ -21,12 +21,16 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   TextEditingController messageController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
   Stream<QuerySnapshot>? texts;
   String admin = '';
   @override
   void initState() {
     retrieveChatAdmin();
     super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+    });
   }
 
   retrieveChatAdmin() {
@@ -65,9 +69,11 @@ class _ChatScreenState extends State<ChatScreen> {
         ],
       ),
       body: SafeArea(
-        child: Stack(
+        child: Column(
           children: <Widget>[
-            textMessages(),
+            Expanded(
+              child: textMessages(_scrollController),
+            ),
             Container(
               alignment: Alignment.bottomCenter,
               width: MediaQuery.of(context).size.width,
@@ -96,24 +102,32 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  textMessages() {
+  textMessages(ScrollController scrollController) {
     //print(Theme.of(context).brightness == Brightness.dark);
-    return StreamBuilder(
-      stream: texts,
-      builder: (context, AsyncSnapshot snapshot) {
-        return snapshot.hasData
-            ? ListView.builder(
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (context, index) {
-                  return TextBubble(
-                      message: snapshot.data.docs[index]['message'],
-                      sender: snapshot.data.docs[index]['sender'],
-                      amISender: widget.username ==
-                          snapshot.data.docs[index]['sender']);
-                },
-              )
-            : Container();
-      },
+    return SingleChildScrollView(
+      reverse: true,
+      controller: scrollController,
+      //physics: ScrollPhysics(),
+      child: StreamBuilder(
+        stream: texts,
+        builder: (context, AsyncSnapshot snapshot) {
+          return snapshot.hasData
+              ? ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  //scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: snapshot.data.docs.length,
+                  itemBuilder: (context, index) {
+                    return TextBubble(
+                        message: snapshot.data.docs[index]['message'],
+                        sender: snapshot.data.docs[index]['sender'],
+                        amISender: widget.username ==
+                            snapshot.data.docs[index]['sender']);
+                  },
+                )
+              : Container();
+        },
+      ),
     );
   }
 
