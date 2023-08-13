@@ -100,28 +100,35 @@ class _ChatScreenState extends State<ChatScreen> {
 
   textMessages() {
     //print(Theme.of(context).brightness == Brightness.dark);
-    return SingleChildScrollView(
-      reverse: true,
-      //physics: ScrollPhysics(),
-      child: StreamBuilder(
-        stream: texts,
-        builder: (context, AsyncSnapshot snapshot) {
-          return snapshot.hasData
-              ? ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  //scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: snapshot.data.docs.length,
-                  itemBuilder: (context, index) {
-                    return TextBubble(
-                        message: snapshot.data.docs[index]['message'],
-                        sender: snapshot.data.docs[index]['sender'],
-                        amISender: widget.username ==
-                            snapshot.data.docs[index]['sender']);
-                  },
-                )
-              : Container();
-        },
+
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: SingleChildScrollView(
+        reverse: true,
+        //physics: ScrollPhysics(),
+        child: StreamBuilder(
+          stream: texts,
+          builder: (context, AsyncSnapshot snapshot) {
+            return snapshot.hasData
+                ? ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    //scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: snapshot.data.docs.length,
+                    itemBuilder: (context, index) {
+                      return TextBubble(
+                          message: snapshot.data.docs[index]['message'],
+                          sender: snapshot.data.docs[index]['sender'],
+                          amISender: widget.username ==
+                              snapshot.data.docs[index]['sender']);
+                    },
+                  )
+                : Container();
+          },
+        ),
       ),
     );
   }

@@ -19,16 +19,9 @@ class _TextBubbleState extends State<TextBubble> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      // padding: EdgeInsets.only(
-      //     top: 4,
-      //     bottom: 4,
-      //     left: widget.amISender ? 0 : 24,
-      //     right: widget.amISender ? 24 : 0),
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment:
           widget.amISender ? MainAxisAlignment.end : MainAxisAlignment.start,
-      // alignment:
-      //     widget.amISender ? Alignment.centerRight : Alignment.centerLeft,
       children: [
         const SizedBox(
           height: 50,
@@ -41,13 +34,10 @@ class _TextBubbleState extends State<TextBubble> {
             : Container(),
         !widget.amISender
             ? const SizedBox(
-                width: 10,
+                width: 5,
               )
             : Container(),
         Container(
-          // margin: widget.amISender
-          //     ? const EdgeInsets.only(left: 30)
-          //     : const EdgeInsets.only(right: 30),
           padding:
               const EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 15),
           decoration: BoxDecoration(
@@ -63,13 +53,6 @@ class _TextBubbleState extends State<TextBubble> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              // Text(
-              //   widget.sender,
-              //   style: const TextStyle(
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              //   textAlign: TextAlign.center,
-              // ),
               Text(
                 widget.message,
                 textAlign: TextAlign.center,
