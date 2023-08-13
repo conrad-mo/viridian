@@ -53,9 +53,12 @@ class _TextBubbleState extends State<TextBubble> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(
-                widget.message,
-                textAlign: TextAlign.center,
+              SizedBox(
+                width: widget.message.length > 26 ? 200 : null,
+                child: Text(
+                  widget.message,
+                  textAlign: TextAlign.left,
+                ),
               )
             ],
           ),
