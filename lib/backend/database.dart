@@ -96,11 +96,13 @@ class DatabaseService {
       await groupDocumentReference.update({
         'members': FieldValue.arrayRemove(['${uid}_$username'])
       });
-      // DocumentSnapshot chatSnapshot = await groupDocumentReference.get();
-      // Map<String, dynamic> data = chatSnapshot.data() as Map<String, dynamic>;
-      // if (data['members'].isEmpty) {
-      //   await groupDocumentReference.delete();
-      // }
+      DocumentSnapshot chatSnapshot = await groupDocumentReference.get();
+      if (chatSnapshot.exists) {
+        Map<String, dynamic> data = chatSnapshot.data() as Map<String, dynamic>;
+        if (data['members'].isEmpty) {
+          groupDocumentReference.delete();
+        }
+      }
     } else {
       await userDocumentReference.update({
         'chats': FieldValue.arrayUnion(['${chatid}_$chatname'])

@@ -76,13 +76,11 @@ class _ChatInfoScreenState extends State<ChatInfoScreen> {
                                         Navigator.of(context)
                                             .pushAndRemoveUntil(
                                                 MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const HomeScreen()),
-                                                (Route<dynamic> route) => false)
-                                            .whenComplete(() async {
-                                          await DatabaseService(uid: user!.uid)
-                                              .deleteChat(widget.chatid);
-                                        });
+                                                    builder:
+                                                        (context) =>
+                                                            const HomeScreen()),
+                                                (Route<dynamic> route) =>
+                                                    false);
                                       });
                                     },
                                     child: const Text('Leave'),
@@ -104,13 +102,13 @@ class _ChatInfoScreenState extends State<ChatInfoScreen> {
                 ),
                 title: Text(trimadmin),
               ),
-              userlist(),
+              userlist(trimadmin),
             ],
           ),
         ));
   }
 
-  userlist() {
+  userlist(String adminname) {
     return StreamBuilder(
       stream: users,
       builder: (context, AsyncSnapshot snapshot) {
@@ -121,14 +119,16 @@ class _ChatInfoScreenState extends State<ChatInfoScreen> {
                 itemCount: snapshot.data['members'].length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    leading: CircleAvatar(
-                      child: Text(trim(snapshot.data['members'][index])
-                          .substring(0, 1)
-                          .toUpperCase()),
-                    ),
-                    title: Text(trim(snapshot.data['members'][index])),
-                  );
+                  return trim(snapshot.data['members'][index]) != adminname
+                      ? ListTile(
+                          leading: CircleAvatar(
+                            child: Text(trim(snapshot.data['members'][index])
+                                .substring(0, 1)
+                                .toUpperCase()),
+                          ),
+                          title: Text(trim(snapshot.data['members'][index])),
+                        )
+                      : Container();
                 });
           } else {
             return const Center(
